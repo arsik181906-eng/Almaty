@@ -1,120 +1,275 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <title>ВУЗы и университеты Алматы</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ВУЗы и университеты Алматы</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: url("https://images.unsplash.com/photo-1605624993175-0f3f2c2e7a6a") no-repeat center center fixed;
-            background-size: cover;
-            color: #fff;
-        }
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
 
-        .overlay {
-            background: rgba(0, 0, 0, 0.65);
-            min-height: 100vh;
-            padding: 40px 20px;
-        }
+    .bg {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+    }
 
-        h1 {
-            text-align: center;
-            font-size: 34px;
-            margin-bottom: 40px;
-        }
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: -1;
+    }
 
-        .list {
-            max-width: 900px;
-            margin: auto;
-        }
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 30px 15px 80px;
+    }
 
-        .uni {
-            background: rgba(255, 255, 255, 0.12);
-            padding: 18px 25px;
-            margin-bottom: 15px;
-            border-radius: 14px;
-            transition: 0.3s;
-        }
+    h1 {
+      text-align: center;
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
 
-        .uni:hover {
-            background: rgba(255, 255, 255, 0.28);
-            transform: scale(1.03);
-        }
+    p {
+      text-align: center;
+      opacity: 0.85;
+      margin-bottom: 25px;
+    }
 
-        .uni a {
-            color: #00f0ff;
-            text-decoration: none;
-            font-size: 20px;
-            font-weight: 500;
-        }
-    </style>
+    .controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    input, select {
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: none;
+      font-size: 16px;
+      outline: none;
+      width: 230px;
+    }
+
+    .uni-card {
+      background: rgba(255,255,255,0.13);
+      padding: 16px 18px;
+      margin-bottom: 14px;
+      border-radius: 18px;
+      transition: 0.25s;
+    }
+
+    .uni-card:hover {
+      background: rgba(255,255,255,0.25);
+      transform: scale(1.01);
+    }
+
+    .uni-card a {
+      font-size: 18px;
+      font-weight: bold;
+      color: #00f0ff;
+      text-decoration: none;
+    }
+
+    .uni-card a:hover {
+      text-decoration: underline;
+    }
+
+    .info {
+      margin-top: 6px;
+      font-size: 15px;
+      opacity: 0.9;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 5px 10px;
+      border-radius: 10px;
+      background: rgba(0,240,255,0.2);
+      font-size: 13px;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="overlay">
-    <h1>ВУЗы и университеты города Алматы</h1>
+<img src="almaty.jpg" class="bg" alt="Алматы">
+<div class="overlay"></div>
 
-    <div class="list">
+<div class="container">
+  <h1>ВУЗы и университеты города Алматы</h1>
+  <p>Поиск, фильтр по направлениям и проверенные адреса</p>
 
-        <div class="uni">
-            <a href="https://kbtu.edu.kz" target="_blank">
-                Казахско-Британский технический университет
-            </a>
-        </div>
+  <div class="controls">
+    <input type="text" id="search" placeholder="Поиск по названию...">
+    <select id="filter">
+      <option value="all">Все направления</option>
+      <option value="human">Гуманитарные</option>
+      <option value="tech">Технические</option>
+      <option value="medical">Медицинские</option>
+      <option value="business">Бизнес / Экономика</option>
+      <option value="it">IT / Технологии</option>
+    </select>
+  </div>
 
-        <div class="uni">
-            <a href="https://kaznu.kz" target="_blank">
-                Казахский национальный университет имени аль-Фараби
-            </a>
-        </div>
+  <!-- ГОСУДАРСТВЕННЫЕ -->
+  <h2>🏛 Государственные университеты</h2>
 
-        <div class="uni">
-            <a href="https://satbayev.university" target="_blank">
-                Satbayev University
-            </a>
-        </div>
+  <div class="uni-card" data-category="human">
+    <a href="https://kaznu.kz" target="_blank">
+      Казахский национальный университет имени аль‑Фараби
+    </a>
+    <div class="info">📍 Алматы, пр. Аль‑Фараби, 71</div>
+    <div class="tag">Гуманитарный / Национальный</div>
+  </div>
 
-        <div class="uni">
-            <a href="https://narxoz.edu.kz" target="_blank">
-                Университет Нархоз
-            </a>
-        </div>
+  <div class="uni-card" data-category="human">
+    <a href="https://abaiuniversity.edu.kz" target="_blank">
+      Казахский национальный педагогический университет имени Абая
+    </a>
+    <div class="info">📍 Алматы, пр. Достык, 13</div>
+    <div class="tag">Педагогический</div>
+  </div>
 
-        <div class="uni">
-            <a href="https://iitu.edu.kz" target="_blank">
-                Международный университет информационных технологий (IITU)
-            </a>
-        </div>
+  <div class="uni-card" data-category="tech">
+    <a href="https://satbayev.university" target="_blank">
+      Satbayev University
+    </a>
+    <div class="info">📍 Алматы, ул. Сатпаева, 22а</div>
+    <div class="tag">Технический</div>
+  </div>
 
-        <div class="uni">
-            <a href="https://kazgasa.kz" target="_blank">
-                Казахская головная архитектурно-строительная академия (КазГАСА)
-            </a>
-        </div>
+  <div class="uni-card" data-category="human">
+    <a href="https://qyzpu.edu.kz" target="_blank">
+      Казахский национальный женский педагогический университет
+    </a>
+    <div class="info">📍 Алматы, ул. Гоголя, 114</div>
+    <div class="tag">Педагогический</div>
+  </div>
 
-        <div class="uni">
-            <a href="https://ablaikhan.kz" target="_blank">
-                КазУМОиМЯ имени Абылай хана
-            </a>
-        </div>
+  <div class="uni-card" data-category="tech">
+    <a href="https://kaznaru.edu.kz" target="_blank">
+      Казахский национальный аграрный исследовательский университет
+    </a>
+    <div class="info">📍 Алматы, пр. Абая, 8</div>
+    <div class="tag">Аграрный</div>
+  </div>
 
-        <div class="uni">
-            <a href="https://asu.edu.kz" target="_blank">
-                Алматинский университет энергетики и связи
-            </a>
-        </div>
+  <div class="uni-card" data-category="medical">
+    <a href="https://kaznmu.edu.kz" target="_blank">
+      Казахский национальный медицинский университет имени С.Д. Асфендиярова
+    </a>
+    <div class="info">📍 Алматы, ул. Толе Би, 94</div>
+    <div class="tag">Медицинский</div>
+  </div>
 
-        <div class="uni">
-            <a href="https://turan.edu.kz" target="_blank">
-                Университет Туран
-            </a>
-        </div>
+  <!-- ЧАСТНЫЕ -->  
+  <h2>🏢 Частные университеты</h2>
 
-    </div>
+  <div class="uni-card" data-category="business">
+    <a href="https://narxoz.edu.kz" target="_blank">
+      Университет Нархоз
+    </a>
+    <div class="info">📍 Алматы, ул. Жандосова, 55</div>
+    <div class="tag">Экономика / Бизнес</div>
+  </div>
+
+  <div class="uni-card" data-category="business">
+    <a href="https://kimep.kz" target="_blank">
+      KIMEP University
+    </a>
+    <div class="info">📍 Алматы, пр. Абая, 2 (и др.)</div>
+    <div class="tag">Экономика / Бизнес</div>
+  </div>
+
+  <div class="uni-card" data-category="it">
+    <a href="https://iitu.edu.kz" target="_blank">
+      Международный университет информационных технологий (IITU)
+    </a>
+    <div class="info">📍 Алматы, ул. Манаса, 34/1</div>
+    <div class="tag">IT / Технологии</div>
+  </div>
+
+  <div class="uni-card" data-category="tech">
+    <a href="https://energo.university" target="_blank">
+      Алматинский университет энергетики и связи (AUPET)
+    </a>
+    <div class="info">📍 Алматы, ул. Байтурсынова, 126/1</div>
+    <div class="tag">Технический</div>
+  </div>
+
+  <div class="uni-card" data-category="tech">
+    <a href="https://atu.edu.kz" target="_blank">
+      Алматинский технологический университет (АТУ)
+    </a>
+    <div class="info">📍 Алматы, ул. Толе Би, 100</div>
+    <div class="tag">Технологический</div>
+  </div>
+
+  <div class="uni-card" data-category="business">
+    <a href="https://almau.edu.kz" target="_blank">
+      Almaty Management University (AlmaU)
+    </a>
+    <div class="info">📍 Алматы, ул. Розыбакиева, 227</div>
+    <div class="tag">Бизнес</div>
+  </div>
+
+  <div class="uni-card" data-category="human">
+    <a href="https://old.krmu.edu.kz" target="_blank">
+      Казахстанско‑Российский медицинский университет
+    </a>
+    <div class="info">📍 Алматы, пр. Абылай хана, 51/53</div>
+    <div class="tag">Медицинский / Международный</div>
+  </div>
+
+  <div class="uni-card" data-category="human">
+    <a href="https://dku.kz" target="_blank">
+      Казахстанско‑Немецкий университет
+    </a>
+    <div class="info">📍 Алматы, ул. Пушкина, 111</div>
+    <div class="tag">Гуманитарный / Международный</div>
+  </div>
+
 </div>
+
+<script>
+  const searchInput = document.getElementById("search");
+  const filterSelect = document.getElementById("filter");
+  const cards = document.querySelectorAll(".uni-card");
+
+  function updateList() {
+    const searchText = searchInput.value.toLowerCase();
+    const filterValue = filterSelect.value;
+
+    cards.forEach(card => {
+      const text = card.innerText.toLowerCase();
+      const category = card.dataset.category;
+      const matchSearch = text.includes(searchText);
+      const matchFilter = filterValue === "all" || category === filterValue;
+      card.classList.toggle("hidden", !(matchSearch && matchFilter));
+    });
+  }
+
+  searchInput.addEventListener("input", updateList);
+  filterSelect.addEventListener("change", updateList);
+</script>
 
 </body>
 </html>
